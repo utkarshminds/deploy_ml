@@ -13,7 +13,8 @@ def load_best_model():
 def make_prediction(image):
     img_resized = image.resize((200,200), Image.LANCZOS)
     img_resized = numpy.array(img_resized) / 255.0  # Normalize pixel values
-    image_array = numpy.expand_dims(img_resized, axis=0)
+    
+    image_array = img_resized.reshape(1,200*200*3)
     bestmodel = load_best_model()
     print(image_array.shape)
     preds = bestmodel.predict(image_array)
